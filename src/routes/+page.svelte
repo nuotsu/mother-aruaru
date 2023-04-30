@@ -30,7 +30,7 @@
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: PUBLIC_SITE_URL || undefined,
+				redirectTo: PUBLIC_SITE_URL ?? 'http://localhost:5173/',
 			}
 		})
 	}
