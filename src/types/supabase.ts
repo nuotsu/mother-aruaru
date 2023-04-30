@@ -12,24 +12,27 @@ export interface Database {
       aruarus: {
         Row: {
           author: string | null
-          created_at: string | null
+          created_at: string
           id: number
           likes: number
           quote: string
+          user_id: string
         }
         Insert: {
           author?: string | null
-          created_at?: string | null
+          created_at: string
           id?: number
           likes: number
-          quote?: string
+          quote: string
+          user_id: string
         }
         Update: {
           author?: string | null
-          created_at?: string | null
+          created_at?: string
           id?: number
           likes?: number
           quote?: string
+          user_id?: string
         }
       }
     }
