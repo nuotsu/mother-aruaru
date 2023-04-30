@@ -1,20 +1,20 @@
-<article>
+<article class="py-2 px-4 bg-white {className}">
 	<blockquote>
 		<p>{aruaru.quote}</p>
 
 		{#if aruaru.author}
-			<footer class="text-xs">—{aruaru.author}</footer>
+			<footer class="text-xs text-right">—{aruaru.author}</footer>
 		{/if}
 	</blockquote>
 
 	<fieldset>
 		{#await supabase.auth.getUser()}
-			<span>🩷 0</span>
+			<span>♥️ 0</span>
 		{:then { data: { user } }}
 			{#if user}
-				<button on:click={like}>🩷 {aruaru.likes}</button>
+				<button on:click={like}>♥️ {aruaru.likes}</button>
 			{:else}
-				<span>🩷 {aruaru.likes}</span>
+				<span>♥️ {aruaru.likes}</span>
 			{/if}
 		{/await}
 	</fieldset>
@@ -25,6 +25,7 @@
 	import { onMount } from 'svelte'
 
 	export let aruaru: App.AruAru
+	export let className: string | undefined = undefined
 
 	$: aruaru = aruaru
 

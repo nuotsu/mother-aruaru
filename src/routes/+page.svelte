@@ -1,20 +1,27 @@
-<h1>Mother <ruby>AruAru<rt>あるある</rt></ruby></h1>
+<div class="flex flex-wrap justify-center items-end gap-4 my-2">
+	{#await supabase.auth.getUser()}
+		Loading...
+	{:then { data: { user }}}
+		{#if user}
+			<AddAruAru {user} />
+			<button on:click={signOut}>Sign out ({user.email})</button>
+		{:else}
+			<button on:click={signInWithGoogle}>Sign in (Google)</button>
+		{/if}
+	{/await}
+</div>
 
-{#each aruarus as aruaru}
-	<AruAru {aruaru} />
-{/each}
+<div class="grid gap-4 items-stretch px-4">
+	{#each aruarus as aruaru}
+		<AruAru {aruaru} className="flex flex-col justify-center" />
+	{/each}
+</div>
 
-{#await supabase.auth.getUser()}
-	Loading...
-{:then { data: { user }}}
-	{#if user}
-		<AddAruAru {user} />
-		<button on:click={signOut}>Sign out ({user.email})</button>
-	{:else}
-		<button on:click={signInWithGoogle}>Sign in (Google)</button>
-	{/if}
-{/await}
-
+<style>
+	.grid {
+		grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	}
+</style>
 
 <script lang="ts">
 	import AruAru from '$/lib/AruAru.svelte'
@@ -30,7 +37,7 @@
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: 'google',
 			options: {
-				redirectTo: PUBLIC_SITE_URL ?? 'http://localhost:5173/',
+				redirectTo: PUBLIC_SITE_URL ?? undefined,
 			}
 		})
 	}

@@ -1,4 +1,6 @@
-<button on:click={() => dialog?.showModal()}>Add AruAru</button>
+<button on:click={() => dialog?.showModal()}>
+	Add <ruby>AruAru<rt>あるある</rt></ruby>
+</button>
 
 <dialog class="backdrop:backdrop-blur-sm" bind:this={dialog}>
 	<form method="post" action="/" class="grid" on:submit|preventDefault={submit}>
@@ -18,9 +20,14 @@
 			<input id="author" name="author" type="text" placeholder="ペンネーム">
 		</label>
 
-		<p>
-			<button type="submit">Submit AruAru</button>
-			<button type="button" on:click={() => dialog?.close()}>Cancel</button>
+		<p class="flex flex-wrap items-end gap-4">
+			<button type="submit">
+				Submit <ruby>AruAru<rt>あるある</rt></ruby>
+			</button>
+
+			<button type="button" on:click={() => dialog?.close()}>
+				Cancel
+			</button>
 		</p>
 	</form>
 </dialog>
